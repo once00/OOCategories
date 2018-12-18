@@ -20,9 +20,9 @@
 #import "UITextField+OO"
 #import "UITextView+OO"
 #import "UIView+OO"
-#import "UITableView+OO"
-#import "UIScrollView+OO"
-#import "UICollectionView+OO"
+//#import "UITableView+OO"
+//#import "UIScrollView+OO"
+//#import "UICollectionView+OO"
 //#import "UIViewController+OO"
 //#import "OOCommonMacro.h"
 
