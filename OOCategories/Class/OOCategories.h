@@ -23,8 +23,8 @@
 #import "UITableView+OO"
 #import "UIScrollView+OO"
 #import "UICollectionView+OO"
-#import "UIViewController+OO"
-#import "OOCommonMacro.h"
+//#import "UIViewController+OO"
+//#import "OOCommonMacro.h"
 
 
 #endif /* OOCategories_h */
