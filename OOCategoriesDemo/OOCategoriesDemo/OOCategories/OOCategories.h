@@ -25,6 +25,7 @@
 #import "UICollectionView+OO"
 #import "UIViewController+OO"
 #import "OOCommonMacro.h"
+#import "OORuntimeKit.h"
 
 
 #endif /* OOCategories_h */
