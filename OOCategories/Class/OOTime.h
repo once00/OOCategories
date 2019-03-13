@@ -87,6 +87,18 @@ NS_ASSUME_NONNULL_BEGIN
  */
 +(NSInteger)OO_timeSwitchTimestamp:(NSString *)formatTime andFormatter:(NSString *)format;
 
+/**
+ 获取当前时间戳有两种方法(以秒为单位)
+ 
+ */
++(NSString *)getNowTimeTimestamp;
+
+/**
+ 获取当前时间戳  （以毫秒为单位）
+ 
+ */
++(NSString *)getNowTimeTimestamp3;
+
 
 @end
 

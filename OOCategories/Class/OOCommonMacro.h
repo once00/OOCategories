@@ -56,7 +56,13 @@
 #define O_WIDTH(s) s * [[UIScreen mainScreen] bounds].size.width / 640
 #define O_HEIGHT(s) s * [[UIScreen mainScreen] bounds].size.height / 1136
 #define FRAME(x,y,width,height) (O_WIDTH(x)),(O_HEIGHT(y)),(O_WIDTH(width)),(O_HEIGHT(height))
-#define CONTROL_W(stance) ((HG_WIDTH/375) * (float)stance)// 适配屏幕比例
+#define CONTROL_W(stance) ((HG_WIDTH/1242) * (float)stance)// 适配屏幕比例
+
+
+#define CONTROL_H(stance) (((HG_HEIGHT-Height_NavBar-TabbarSafeBottomMargin)/(2208-192)) * (CGFloat)stance)// 适配屏幕比例
+
+#define CONTROL_NoNav_H(stance) (((HG_HEIGHT-TabbarSafeBottomMargin)/(2208-192)) * (CGFloat)stance)// 适配屏幕比例
+
 #define RESOURCE_PATH [[NSBundle mainBundle] resourcePath]// 适配屏幕比例
 #define SCALE [[UIScreen mainScreen] bounds].size.width/375
 #define HEIGHTNEW [UIScreen mainScreen].bounds.size.height
@@ -74,11 +80,16 @@
 #define NavHeight (NavRectHH+StatusRectHH) //导航栏高度
 /// 底部宏，吃一见长一智吧，别写数字了(iphonex适配)
 #define SafeAreaBottomHeight (kWJScreenHeight == 812.0 ? 34 : 0)
+
+#define  TabbarSafeBottomMargin SafeBottomMargin()
+
+//#define  TabbarSafeBottomMargina ((@available(iOS 11.0, *)) ? ([UIApplication sharedApplication].delegate.window.safeAreaInsets.bottom) : 0)
+
+//(([[UIDevice currentDevice].systemVersion doubleValue] >= 11.0) ? ([UIApplication sharedApplication].delegate.window.safeAreaInsets.bottom) : 0)
 /// 第一个参数是当下的控制器适配iOS11 一下的，第二个参数表示scrollview或子类
 #define AdjustsScrollViewInsetNever(controller,view) if(@available(iOS 11.0, *)) {view.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;} else if([controller isKindOfClass:[UIViewController class]]) {controller.automaticallyAdjustsScrollViewInsets = false;}
 /// 高度系数 812.0 是iPhoneX的高度尺寸，667.0表示是iPhone 8 的高度，如果你觉的它会变化，那我也很无奈
 #define kWJHeightCoefficient (kWJScreenHeight == 812.0 ? 667.0/667.0 : kWJScreenHeight/667.0)
-
 #define NAVBAR_COLORCHANGE_POINT (-IMAGE_HEIGHT + NAV_HEIGHT*2)
 #define NAV_HEIGHT 64
 #define IMAGE_HEIGHT 260
@@ -145,7 +156,29 @@
 
 
 
+//宏定义
+#define FONT_SIZE(size) ([UIFont systemFontOfSize:FontSize(size))
 
+/**
+ *  字体适配 我在PCH文件定义了一个方法
+ */
+static inline CGFloat FontSize(CGFloat fontSize){
+    if (HG_WIDTH==320) {
+        return fontSize-2;
+    }else if (HG_WIDTH==375){
+        return fontSize;
+    }else{
+        return fontSize+2;
+    }
+}
+
+static inline CGFloat SafeBottomMargin(){
+    if (iOS11) {
+        return ([UIApplication sharedApplication].delegate.window.safeAreaInsets.bottom);
+    }else{
+        return 0;
+    }
+}
 
 
 
