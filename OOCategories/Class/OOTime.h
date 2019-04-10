@@ -30,8 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
  @param bDate 第二个时间
  @return 格式(yyyy-MM-dd HH:mm:ss) 0 相等 1 bDate大 2 aDate大
  */
-+ (NSInteger)OO_datecompareDate:(NSString*)aDate withDate:(NSString*)bDate;
-
+//+ (NSInteger)OO_datecompareDate:(NSString*)aDate withDate:(NSString*)bDate;
++ (NSInteger)OO_datecompareDate:(NSString*)aDate withDate:(NSString*)bDate dateformat:(NSString*)type;
 
 
 /**
@@ -99,6 +99,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 +(NSString *)getNowTimeTimestamp3;
 
+/**
+ 显示发送时间（几分钟前，几小时前，几天前）  （以毫秒为单位）
+ 
+ */
++(NSString *) compareCurrentTime:(NSString *)str;
 
 @end
 

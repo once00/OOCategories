@@ -20,6 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 NSString *OO_SafeValue(id value);
 
+//判断是否全是空格
+
++ (BOOL) isEmpty:(NSString *) str;
+
 @end
 
 NS_ASSUME_NONNULL_END

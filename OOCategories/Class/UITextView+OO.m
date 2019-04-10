@@ -28,4 +28,18 @@
     [self setValue:placeHolderLabel forKey:@"_placeholderLabel"];
 }
 
++(void)set_OO_lineSpacing:(UITextView *)textview HightSpace:(float)space{
+    
+    NSString *text = textview.text;
+    // 设置属性
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    // 设置行间距
+    paragraphStyle.lineSpacing = space;
+    NSDictionary *attributes = @{
+                                 NSFontAttributeName:[UIFont systemFontOfSize:17],
+                                 NSParagraphStyleAttributeName:paragraphStyle
+                                 };
+    textview.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
 @end

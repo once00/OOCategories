@@ -21,6 +21,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(void)set_OO_Placeholder:(NSString *)placeholdStr placeholdColor:(UIColor *)placeholdColor;
 
+/**
+行间距
+
+@param textview 那个textview
+@param space 间距
+*/
++(void)set_OO_lineSpacing:(UITextView *)textview HightSpace:(float)space;
+
 @end
 
 NS_ASSUME_NONNULL_END

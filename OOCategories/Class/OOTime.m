@@ -51,10 +51,11 @@
 }
 
 //比较两个日期的大小  日期格式为2016-08-14 08：46：20
-+ (NSInteger)OO_datecompareDate:(NSString*)aDate withDate:(NSString*)bDate{
++ (NSInteger)OO_datecompareDate:(NSString*)aDate withDate:(NSString*)bDate dateformat:(NSString*)type{
     NSInteger aa;
     NSDateFormatter *dateformater = [[NSDateFormatter alloc] init];
-    [dateformater setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    [dateformater setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [dateformater setDateFormat:type];
     NSDate *dta = [[NSDate alloc] init];
     NSDate *dtb = [[NSDate alloc] init];
     
@@ -299,6 +300,44 @@
     
 }
 
++(NSString *) compareCurrentTime:(NSString *)str
+{
+
+    NSTimeInterval time22=[str doubleValue]/1000;//传入的时间戳str如果是精确到毫秒的记得要/1000
+    NSDate *detailDate22=[NSDate dateWithTimeIntervalSince1970:time22];
+    NSDateFormatter *dateFormatter22 = [[NSDateFormatter alloc] init]; //实例化一个NSDateFormatter对象
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter22 setDateFormat:@"yyyy-MM-dd HH:mm:ss SS"];
+    NSString *currentDateStr22 = [dateFormatter22 stringFromDate: detailDate22];
+    
+    NSDate *timeDate = [dateFormatter22 dateFromString:currentDateStr22];
+    NSDate *currentDate = [NSDate date];
+    NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:timeDate];
+    long temp = 0;
+    NSString *result;
+    if (timeInterval/60 < 1)
+    {
+        result = [NSString stringWithFormat:@"刚刚"];
+    }
+    else if((temp = timeInterval/60) <60){
+        result = [NSString stringWithFormat:@"%ld分钟前",temp];
+    }
+    else if((temp = temp/60) <24){
+        result = [NSString stringWithFormat:@"%ld小时前",temp];
+    }
+    else if((temp = temp/24) <30){
+        result = [NSString stringWithFormat:@"%ld天前",temp];
+    }
+    else if((temp = temp/30) <12){
+        result = [NSString stringWithFormat:@"%ld月前",temp];
+    }
+    else{
+        temp = temp/12;
+        result = [NSString stringWithFormat:@"%ld年前",temp];
+    }
+    
+    return  result;
+}
 
 
 
