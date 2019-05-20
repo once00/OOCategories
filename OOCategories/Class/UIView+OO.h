@@ -12,6 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (OO)
 
+
+/**
+ 添加上下跳动动画
+ */
+- (void)addbeatinganimation;
+
 /**
  移除此view上的所有子视图
  */

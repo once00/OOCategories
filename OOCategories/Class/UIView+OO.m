@@ -10,6 +10,21 @@
 
 @implementation UIView (OO)
 
+/**
+ 添加上下跳动动画
+ */
+- (void)addbeatinganimation{
+    
+    CABasicAnimation *upanddownAnimation = [CABasicAnimation animationWithKeyPath:@"transform.translation.y"];
+    upanddownAnimation.removedOnCompletion = NO;
+    upanddownAnimation.duration = 0.5;
+    upanddownAnimation.autoreverses = YES;
+    upanddownAnimation.repeatCount = MAXFLOAT;
+    upanddownAnimation.fromValue = [NSNumber numberWithFloat:0];
+    upanddownAnimation.toValue = [NSNumber numberWithFloat:+20];
+    [self.layer addAnimation:upanddownAnimation forKey:@"roundView"];
+}
+
 ///< 移除此view上的所有子视图
 - (void)remove_OO_AllSubviews {
     for (UIView *view in self.subviews) {

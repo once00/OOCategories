@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UICollectionView (OO)
 
+@property (nonatomic, strong, readonly) UIView *emptyCollView;
+
 
 /**
  初始化UICollectionView
@@ -30,6 +32,14 @@ NS_ASSUME_NONNULL_BEGIN
               collectionViewbackgroundColor:(UIColor *)color
                          collectionViewCell:(UICollectionViewCell *)cell
                        collectionViewCellID:(NSString *)cellID;
+
+/**
+ 添加空白页面
+ 
+ @param img 展位图
+ @return 无
+ */
+-(void)addEmptyViewWithCollPositionType:(UIImage *)img;
 
 @end
 

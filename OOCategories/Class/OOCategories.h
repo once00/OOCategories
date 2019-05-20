@@ -26,6 +26,8 @@
 #import "UIViewController+OO.h"
 #import "OOCommonMacro.h"
 #import "OOProcessData.h"
+#import "OORuntimeKit.h"
+#import "OONSPredicate.h"
 
 
 

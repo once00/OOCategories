@@ -7,8 +7,14 @@
 //
 
 #import "UICollectionView+OO.h"
+#import "OOCommonMacro.h"
+#import <objc/runtime.h>
+
+static char UICollectionViewEmptyView;
 
 @implementation UICollectionView (OO)
+
+@dynamic emptyCollView;
 
 + (UICollectionView *)collview_OO_withStyle:(UICollectionViewScrollDirection)style
                     InteritemSpacin:(CGFloat)lr
@@ -38,5 +44,47 @@
     
     return collectionView;
 }
+
+
+/**
+ 添加空白页面
+ 
+ @param img 展位图
+ @return 无
+ */
+-(void)addEmptyViewWithCollPositionType:(UIImage *)img{
+    
+    if (!self.emptyCollView){
+        
+        CGRect frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        
+        UIView* noMessageView = [[UIView alloc] initWithFrame:frame];
+        noMessageView.backgroundColor = [UIColor clearColor];
+        
+        UIImageView *carImageView = [[UIImageView alloc] init];
+        [noMessageView addSubview:carImageView];
+        
+        [self addSubview:noMessageView];
+        
+        [carImageView setImage:img];
+        carImageView.frame=CGRectMake((frame.size.width-img.size.width)/2, ((frame.size.height-img.size.height)/2) * 0.6, CONTROL_W(360), CONTROL_W(376));
+        
+        self.emptyView = noMessageView;
+        
+    }
+}
+- (UIView *)emptyView
+{
+    return objc_getAssociatedObject(self, &UICollectionViewEmptyView);
+}
+- (void)setEmptyView:(UIView *)emptyView
+{
+    [self willChangeValueForKey:@"OOcollEmptyView"];
+    objc_setAssociatedObject(self, &UICollectionViewEmptyView,
+                             emptyView,
+                             OBJC_ASSOCIATION_ASSIGN);
+    [self didChangeValueForKey:@"OOcollEmptyView"];
+}
+
 
 @end

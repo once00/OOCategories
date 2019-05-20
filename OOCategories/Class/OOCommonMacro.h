@@ -9,6 +9,98 @@
 #ifndef OOCommonMacro_h
 #define OOCommonMacro_h
 
+
+
+// 颜色相关
+#define OOColorFromHexAlpha(hexValue,a) [UIColor colorWithRed:((float)((hexValue & 0xFF0000) >> 16))/255.0 green:((float)((hexValue & 0xFF00) >> 8))/255.0 blue:((float)(hexValue & 0xFF))/255.0 alpha:a]
+#define OOColorFromHex(hexValue)            UIColorFromHexWithAlpha(hexValue,1.0)
+#define OOColorFromRGBA(r,g,b,a)            [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+#define OOColorFromRGB(r,g,b)               UIColorFromRGBA(r,g,b,1.0)
+
+
+//NSNumber
+#define OONUN_INT(int) [NSNumber numberWithInt:int]
+#define OONUN_FLOAT(float) [NSNumber numberWithFloat:float]
+#define OONUN_BOOL(bool) [NSNumber numberWithBool:bool]
+
+//NSIndexPath
+#define OOIndex_path(a,b) [NSIndexPath indexPathWithIndexes:(NSUInteger[]){a,b} length:2]
+
+
+//尺寸
+#define OOSCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
+#define OOSCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
+#define OOWIDTH(view) view.frame.size.width
+#define OOHEIGHT(view) view.frame.size.height
+#define OOX(view) view.frame.origin.x
+#define OOY(view) view.frame.origin.y
+#define OOLeft(view) view.frame.origin.x
+#define OOTop(view) view.frame.origin.y
+#define OOBOttom(view) (view.frame.origin.y + view.frame.size.height)
+#define OORight(view) (view.frame.origin.x + view.frame.size.width)
+#define OOCenterBInA(A,B) (A-B)/2//控件居中位置
+#define OOCircleDegreeToRadian(d) ((d)*M_PI)/180.0//角度转换为弧度
+#define OOStatusBarHeight [UIApplication sharedApplication].statusBarFrame.size.height//状态栏高度
+#define OONavBarHeight self.navigationController.navigationBar.frame.size.height//导航栏高度
+#define OOTabBarHeight [[UITabBarController alloc] init].tabBar.frame.size.height//底部tabbar高度
+#define OOTabBarSafeHeight SafeBottomMargin()//安全距离
+
+#define OOHeight_StatusBar ((OO_isIphoneX==YES || OO_isIphoneXr ==YES || OO_isIphoneXs== YES || OO_isIphoneXsMax== YES) ? 44.0 : 20.0)
+#define OOHeight_NavBar ((OO_isIphoneX==YES || OO_isIphoneXr ==YES || OO_isIphoneXs== YES || OO_isIphoneXsMax== YES) ? 88.0 : 64.0)
+#define OOHeight_TabBar ((OO_isIphoneX==YES || OO_isIphoneXr ==YES || OO_isIphoneXs== YES || OO_isIphoneXsMax== YES) ? 83.0 : 49.0)
+#define OOHeight_TopBar (OOHeight_StatusBar + OOHeight_NavBar)
+
+
+//iOS Version
+
+#define OO_is_DSFourInch ([UIScreen mainScreen].bounds.size.height >= 568.0)//是否为4inch
+#define OO_IS_iOS(num) ([[UIDevice currentDevice].systemVersion doubleValue] >= num)//是否为iOS某个系统
+
+
+
+#define OO_isPad ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)//判断是否是ipad
+#define OO_isPhone4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) && !OO_isPad : NO)//判断iPhone4系列
+#define OO_isPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) && !OO_isPad : NO)//判断iPhone5系列
+#define OO_isPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) && !OO_isPad : NO)//判断iPhone6系列
+#define OO_isPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) && !OO_isPad : NO)//判断iphone6+系列
+#define OO_isIphoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) && !OO_isPad : NO)//判断iPhoneX
+#define OO_isIphoneXr ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(828, 1792), [[UIScreen mainScreen] currentMode].size) && !OO_isPad : NO)//判断iPHoneXr
+#define OO_isIphoneXs ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) && !OO_isPad : NO)//判断iPhoneXs
+#define OO_isIphoneXsMax ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size) && !OO_isPad : NO)//判断iPhoneXs Max
+
+
+//图片
+#define OOMainImageName(name) [UIImage imageNamed :name]// 自定义视图 图片路径
+
+
+//将NSUserDefaults的实例化定义成宏
+#define OO_USER_DEFAULT [NSUserDefaults standardUserDefaults]
+
+
+//NSNotificationCenter
+#define OO_NSREMOVENotification [[NSNotificationCenter defaultCenter]removeObserver:self]
+#define OO_NSPOSTNotification(name,obj,userinfo) [[NSNotificationCenter defaultCenter] postNotificationName:name object:self userInfo:userinfo]
+#define OO_NSAddObjectrver(selectorStr,keyName) [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectorStr) name:keyName object:nil]
+
+
+
+
+
+
+
+//兼容旧版
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  *  颜色相关
  */

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UITableView (OO)
 
+@property (nonatomic, strong, readonly) UIView *emptyTabView;
 
 /**
  样式,是否滚动,背景颜色,分割线样式,cell,cellID
@@ -30,6 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
                      separatorStyle:(UITableViewCellSeparatorStyle)type
                       tableviewCell:(id)cell
                     tableviewCellID:(NSString *)cellID;
+/**
+ 添加空白页面
+ 
+ @param img 展位图
+ @return 无
+ */
+-(void)addEmptyViewWithTabPositionType:(UIImage *)img;
 
 @end
 
