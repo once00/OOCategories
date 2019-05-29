@@ -7,9 +7,10 @@
 //
 
 #import "UIButton+OO.h"
+#import "OOCommonMacro.h"
 
 #define OO_Button_IS_IOS9 ([[[UIDevice currentDevice] systemVersion] floatValue] >=9.0)
-#define OO_Button_WW [[UIScreen mainScreen] bounds].size.width/375
+//#define OO_Button_WW [[UIScreen mainScreen] bounds].size.width/375
 
 @implementation UIButton (OO)
 
@@ -29,7 +30,7 @@
     }
     [button setTitle:title forState:UIControlStateNormal];
     UIFont *fontP ;//这个是9.0以后自带的平方字体
-    OO_Button_IS_IOS9 ?( fontP = [UIFont fontWithName:@"PingFangSC-Regular" size:font*OO_Button_WW] ): (fontP = [UIFont systemFontOfSize:font*OO_Button_WW]);
+    OO_Button_IS_IOS9 ?( fontP = [UIFont fontWithName:@"PingFangSC-Regular" size:CONTROL_W(font)] ): (fontP = [UIFont systemFontOfSize:CONTROL_W(font)]);
     [button.titleLabel setFont:fontP];
     [button setTitleColor:titleColor forState:UIControlStateNormal];
     if (button.selected==YES) {
@@ -39,6 +40,29 @@
     }
     [button.layer setBorderWidth:width];
     [button.layer setBorderColor:bordercolor.CGColor];
+    if (target!=nil&&selector!=nil) {
+        
+        [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return button;
+}
+
+/**
+ *  背景图,点击方法
+ *  @param  def    默认图
+ *  @param  selecr    点击图
+ *  @param   selector   点击方法
+ */
++(UIButton *)button_OO_WithbackGroundImgDef:(UIImage *)def
+                           backGroundImgDef:(UIImage *)selecr
+                                     target:(id)target selector:(SEL)selector{
+    
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [button setImage:def forState:UIControlStateNormal];
+    [button setImage:selecr forState:UIControlStateHighlighted];
+
     if (target!=nil&&selector!=nil) {
         
         [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];

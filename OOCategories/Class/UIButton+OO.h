@@ -39,6 +39,16 @@ typedef NS_ENUM(NSInteger, CDMImagePosition) {
                             target:(id)target selector:(SEL)selector;
 
 /**
+ *  背景图,点击方法
+ *  @param  def    默认图
+ *  @param  selecr    点击图
+ *  @param   selector   点击方法
+ */
++(UIButton *)button_OO_WithbackGroundImgDef:(UIImage *)def
+                           backGroundImgDef:(UIImage *)selecr
+                            target:(id)target selector:(SEL)selector;
+
+/**
  *  利用UIButton的titleEdgeInsets和imageEdgeInsets来实现文字和图片的自由排列
  *  注意：这个方法需要在设置图片和文字之后才可以调用，且button的大小要大于 图片大小+文字大小+spacing
  *
