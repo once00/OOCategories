@@ -23,7 +23,7 @@
     label.text=text;
     
     UIFont*fontP;
-    OO_Label_IS_IOS9 ?( fontP = [UIFont fontWithName:@"PingFangSC-Regular" size:font*OO_Label_WW] ): (fontP = [UIFont systemFontOfSize:font*OO_Label_WW]);
+    OO_Label_IS_IOS9 ?( fontP = [UIFont fontWithName:@"PingFangSC-Regular" size:font] ): (fontP = [UIFont systemFontOfSize:font]);
     label.font=fontP;
     label.textColor=textColor;
     label.textAlignment=alignment;

@@ -18,8 +18,6 @@ typedef NS_ENUM(NSInteger, CDMImagePosition) {
 };
 
 @interface UIButton (OO)
-
-
 /**
  *  标题,标题颜色,标题大小,标题圆角,控件背景颜色,点击的背景颜色,边框线宽度,点击方法
  *  @param  title    标题
@@ -44,9 +42,10 @@ typedef NS_ENUM(NSInteger, CDMImagePosition) {
  *  @param  selecr    点击图
  *  @param   selector   点击方法
  */
+
 +(UIButton *)button_OO_WithbackGroundImgDef:(UIImage *)def
                            backGroundImgDef:(UIImage *)selecr
-                            target:(id)target selector:(SEL)selector;
+                                     target:(id)target selector:(SEL)selector;
 
 /**
  *  利用UIButton的titleEdgeInsets和imageEdgeInsets来实现文字和图片的自由排列

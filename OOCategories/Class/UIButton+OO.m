@@ -14,6 +14,40 @@
 
 @implementation UIButton (OO)
 
++(UIButton *)button_OO_With1normalTitle:(NSString *)title
+                       normalTitleColor:(UIColor *)titleColor
+                       normalTiltleFont:(CGFloat)font
+                            cornerRadiu:(CGFloat)cornerRadiu
+                        backGroundColor:(UIColor*)backGroundColor
+                  backSelectGroundColor:(UIColor*)backSelectGroundColor
+                            BorderWidth:(float)width
+                            BorderColor:(UIColor*)bordercolor
+                                 target:(id)target selector:(SEL)selector{
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    if (cornerRadiu!=0) {
+        [button.layer setMasksToBounds:YES];
+        [button.layer setCornerRadius:cornerRadiu];
+    }
+    [button setTitle:title forState:UIControlStateNormal];
+    UIFont *fontP ;//这个是9.0以后自带的平方字体
+    OO_Button_IS_IOS9 ?( fontP = [UIFont fontWithName:@"PingFangSC-Regular" size:CONTROL_W(font)] ): (fontP = [UIFont systemFontOfSize:CONTROL_W(font)]);
+    [button.titleLabel setFont:fontP];
+    [button setTitleColor:titleColor forState:UIControlStateNormal];
+    if (button.selected==YES) {
+        [button setBackgroundColor:backSelectGroundColor];
+    }else{
+        [button setBackgroundColor:backGroundColor];
+    }
+    [button.layer setBorderWidth:width];
+    [button.layer setBorderColor:bordercolor.CGColor];
+    if (target!=nil&&selector!=nil) {
+        
+        [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return button;
+}
+
 +(UIButton *)button_OO_WithnormalTitle:(NSString *)title
                   normalTitleColor:(UIColor *)titleColor
                   normalTiltleFont:(CGFloat)font
@@ -47,6 +81,7 @@
     
     return button;
 }
+
 
 /**
  *  背景图,点击方法
