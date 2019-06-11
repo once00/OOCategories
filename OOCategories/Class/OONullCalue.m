@@ -26,6 +26,24 @@ NSString *OO_SafeValue(id value) {
     }
 }
 
+NSString *OO_SafeUrl(NSString* urlHead, NSString* urlBody) {
+    if(!urlHead
+       || [urlHead isEqualToString:@"<null>"]
+       || [urlHead isEqualToString:@"(null)"]
+       || [urlHead isEqualToString:@""]) {
+        return @"";
+    }
+    
+    if(!urlBody
+       || [urlBody isEqualToString:@"<null>"]
+       || [urlBody isEqualToString:@"(null)"]
+       || [urlBody isEqualToString:@""]) {
+        return @"";
+    }
+    
+    return [[NSString alloc] initWithFormat:@"%@%@", urlHead, urlBody];
+}
+
 //判断是否全是空格
 
 + (BOOL) isEmpty:(NSString *) str {

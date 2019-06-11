@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 NSString *OO_SafeValue(id value);
 
+NSString *OO_SafeUrl(NSString* urlHead, NSString* urlBody);
+
 //判断是否全是空格
 
 + (BOOL) isEmpty:(NSString *) str;

@@ -149,7 +149,7 @@
 #define O_HEIGHT(s) s * [[UIScreen mainScreen] bounds].size.height / 1136
 #define FRAME(x,y,width,height) (O_WIDTH(x)),(O_HEIGHT(y)),(O_WIDTH(width)),(O_HEIGHT(height))
 #define CONTROL_W(stance) ((HG_WIDTH/1242) * (float)stance)// 适配屏幕比例
-#define CONTROL_W_ADAPTER(stance) (414.0f / 1242 * stance * (1 + ([UIScreen mainScreen] bounds].size.width / 414 - 1) / 2))// 适配屏幕比例
+#define CONTROL_W_ADAPTER(stance) (414.0f / 1242 * stance * (1 + ([[UIScreen mainScreen] bounds].size.width / 414 - 1) / 2))// 适配屏幕比例
 
 
 #define CONTROL_H(stance) (((HG_HEIGHT-Height_NavBar-TabbarSafeBottomMargin)/(2208-192)) * (CGFloat)stance)// 适配屏幕比例
