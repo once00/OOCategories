@@ -8,9 +8,15 @@
 
 #import "UIButton+OO.h"
 #import "OOCommonMacro.h"
+#import <objc/runtime.h>
 
 #define OO_Button_IS_IOS9 ([[[UIDevice currentDevice] systemVersion] floatValue] >=9.0)
 //#define OO_Button_WW [[UIScreen mainScreen] bounds].size.width/375
+
+static char topNameKey;
+static char rightNameKey;
+static char bottomNameKey;
+static char leftNameKey;
 
 @implementation UIButton (OO)
 
@@ -30,7 +36,7 @@
     }
     [button setTitle:title forState:UIControlStateNormal];
     UIFont *fontP ;//这个是9.0以后自带的平方字体
-    OO_Button_IS_IOS9 ?( fontP = [UIFont fontWithName:@"PingFangSC-Regular" size:CONTROL_W(font)] ): (fontP = [UIFont systemFontOfSize:CONTROL_W(font)]);
+    OO_Button_IS_IOS9 ?( fontP = [UIFont fontWithName:@"PingFangSC-Regular" size:font] ): (fontP = [UIFont systemFontOfSize:font]);
     [button.titleLabel setFont:fontP];
     [button setTitleColor:titleColor forState:UIControlStateNormal];
     if (button.selected==YES) {
@@ -64,7 +70,7 @@
     }
     [button setTitle:title forState:UIControlStateNormal];
     UIFont *fontP ;//这个是9.0以后自带的平方字体
-    OO_Button_IS_IOS9 ?( fontP = [UIFont fontWithName:@"PingFangSC-Regular" size:CONTROL_W(font)] ): (fontP = [UIFont systemFontOfSize:CONTROL_W(font)]);
+    OO_Button_IS_IOS9 ?( fontP = [UIFont fontWithName:@"PingFangSC-Regular" size:font] ): (fontP = [UIFont systemFontOfSize:font]);
     [button.titleLabel setFont:fontP];
     [button setTitleColor:titleColor forState:UIControlStateNormal];
     if (button.selected==YES) {
@@ -147,6 +153,63 @@
             break;
     }
     
+}
+
+
+- (void)setIsImageadaptive:(BOOL)isive{
+    
+    if (isive==YES) {
+        
+        self.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+        [[self imageView] setContentMode:UIViewContentModeScaleAspectFill];
+        self.contentHorizontalAlignment= UIControlContentHorizontalAlignmentFill;
+        self.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+    }
+}
+
+- (void)setEnlargeEdgeWithMargin:(CGFloat)margin
+{
+    objc_setAssociatedObject(self, &topNameKey, [NSNumber numberWithFloat:margin], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, &rightNameKey, [NSNumber numberWithFloat:margin], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, &bottomNameKey, [NSNumber numberWithFloat:margin], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, &leftNameKey, [NSNumber numberWithFloat:margin], OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (void)setEnlargeEdgeWithEdge:(UIEdgeInsets)edge
+{
+    objc_setAssociatedObject(self, &topNameKey, [NSNumber numberWithFloat:edge.top], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, &rightNameKey, [NSNumber numberWithFloat:edge.right], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, &bottomNameKey, [NSNumber numberWithFloat:edge.bottom], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, &leftNameKey, [NSNumber numberWithFloat:edge.left], OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (CGRect)enlargedRect
+{
+    NSNumber* topEdge = objc_getAssociatedObject(self, &topNameKey);
+    NSNumber* rightEdge = objc_getAssociatedObject(self, &rightNameKey);
+    NSNumber* bottomEdge = objc_getAssociatedObject(self, &bottomNameKey);
+    NSNumber* leftEdge = objc_getAssociatedObject(self, &leftNameKey);
+    if (topEdge && rightEdge && bottomEdge && leftEdge)
+    {
+        return CGRectMake(self.bounds.origin.x - leftEdge.floatValue,
+                          self.bounds.origin.y - topEdge.floatValue,
+                          self.bounds.size.width + leftEdge.floatValue + rightEdge.floatValue,
+                          self.bounds.size.height + topEdge.floatValue + bottomEdge.floatValue);
+    }
+    else
+    {
+        return self.bounds;
+    }
+}
+
+- (UIView*)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    CGRect rect = [self enlargedRect];
+    if (CGRectEqualToRect(rect, self.bounds))
+    {
+        return [super hitTest:point withEvent:event];
+    }
+    return CGRectContainsPoint(rect, point) ? self : nil;
 }
 
 @end

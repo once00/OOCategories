@@ -13,6 +13,16 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UILabel (OO)
 
 /**
+ 
+ 和UIbutton相似，内边距属性
+ 
+ 控制字体与控件边界的间隙
+ 
+ */
+
+@property (nonatomic, assign) UIEdgeInsets contentInsets;
+
+/**
  *  内容,字体颜色,字体大小,字体位置,是否N行自适应
  *  @param  text    内容
  *  @param  font    字体大小

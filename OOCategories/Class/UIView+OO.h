@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^OOTouchCallBackBlock)(void);
+
 @interface UIView (OO)
 
 
@@ -41,6 +43,20 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)add_OO_RoundedCorners:(UIRectCorner)corners
                 withRadii:(CGSize)radii
                  viewRect:(CGRect)rect;
+
+
+@property (nonatomic, copy) OOTouchCallBackBlock touchCallBackBlock;
+
+/**
+ 添加点击事件(block形式)
+ */
+- (void)addActionWithblock:(OOTouchCallBackBlock)block;
+
+
+/**
+ 添加点击事件
+ */
+- (void)addTarget:(id)target action:(SEL)action;
 
 @end
 

@@ -55,6 +55,27 @@ typedef NS_ENUM(NSInteger, CDMImagePosition) {
  */
 - (void)set_OO_ImagePosition:(CDMImagePosition)postion spacing:(CGFloat)spacing;
 
+/**
+ *  img跟按钮一样大 自适应
+ *
+ *  @param isive 是否全屏
+ */
+- (void)setIsImageadaptive:(BOOL)isive;
+
+/**
+ *  设置按钮热区
+ *
+ *  @param margin 热区扩展边距，为正热区扩大，反之缩小
+ */
+- (void)setEnlargeEdgeWithMargin:(CGFloat)margin;
+
+/**
+ *  设置按钮热区
+ *
+ *  @param edge 热区扩展边距，为正热区扩大，反之缩小
+ */
+- (void)setEnlargeEdgeWithEdge:(UIEdgeInsets)edge;
+
 @end
 
 NS_ASSUME_NONNULL_END

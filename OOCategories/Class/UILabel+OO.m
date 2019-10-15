@@ -7,11 +7,56 @@
 //
 
 #import "UILabel+OO.h"
+#import <objc/runtime.h>
 
 #define OO_Label_IS_IOS9 ([[[UIDevice currentDevice] systemVersion] floatValue] >=9.0)
 #define OO_Label_WW [[UIScreen mainScreen] bounds].size.width/375
 
 @implementation UILabel (OO)
+
+
+static char kContentInsetsKey;
+static char kshowContentInsetsKey;
+- (void)setContentInsets:(UIEdgeInsets)contentInsets
+{
+    objc_setAssociatedObject(self, &kContentInsetsKey, NSStringFromUIEdgeInsets(contentInsets), OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, &kshowContentInsetsKey, @YES, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    
+}
+- (UIEdgeInsets)contentInsets
+{
+    return UIEdgeInsetsFromString(objc_getAssociatedObject(self, &kContentInsetsKey));
+}
++ (void)load
+{
+    [super load];
+    // class_getInstanceMethod()
+    Method fromMethod = class_getInstanceMethod([self class], @selector(drawTextInRect:));
+    Method toMethod = class_getInstanceMethod([self class], @selector(tt_drawTextInRect:));
+    // class_addMethod()
+    if (!class_addMethod([self class], @selector(drawTextInRect:), method_getImplementation(toMethod), method_getTypeEncoding(toMethod))) {
+        method_exchangeImplementations(fromMethod, toMethod);
+        }
+}
+- (void)tt_drawTextInRect:(CGRect)rect
+{
+    BOOL show = objc_getAssociatedObject(self, &kshowContentInsetsKey);
+    if (show) {
+        rect = UIEdgeInsetsInsetRect(rect, self.contentInsets);
+        }
+    [self tt_drawTextInRect:rect];
+}
+
+
+
+
+
+
+
+
+
+
+
 
 +(UILabel*)label_OO_WithText:(NSString*)text
                 textFont:(CGFloat)font

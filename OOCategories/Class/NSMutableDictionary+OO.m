@@ -16,6 +16,9 @@
     if (anObject == nil) {
         return;
     }
+    if ([anObject isKindOfClass:[NSNull class]]) {
+        return;
+    }
     [self setObject:anObject forKey:aKey];
 }
 

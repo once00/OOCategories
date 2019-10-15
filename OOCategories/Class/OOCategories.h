@@ -29,6 +29,7 @@
 #import "OORuntimeKit.h"
 #import "OONSPredicate.h"
 #import "OODeviceIn.h"
+#import "NSObject+OOKVO.h"
 
 
 

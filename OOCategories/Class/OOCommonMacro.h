@@ -82,6 +82,11 @@
 #define OO_NSPOSTNotification(name,obj,userinfo) [[NSNotificationCenter defaultCenter] postNotificationName:name object:self userInfo:userinfo]
 #define OO_NSAddObjectrver(selectorStr,keyName) [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectorStr) name:keyName object:nil]
 
+#pragma mark - 忽略 iOS 13 KVC 访问私有属性限制
+
+/// 将 KVC 代码包裹在这个宏中，可忽略系统的  KVC 访问限制
+#define BeginIgnoreUIKVCAccessProhibited if (@available(iOS 13.0, *)) NSThread.currentThread.qmui_shouldIgnoreUIKVCAccessProhibited = YES;
+#define EndIgnoreUIKVCAccessProhibited if (@available(iOS 13.0, *)) NSThread.currentThread.qmui_shouldIgnoreUIKVCAccessProhibited = NO;
 
 
 
