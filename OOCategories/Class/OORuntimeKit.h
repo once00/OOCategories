@@ -17,7 +17,7 @@
  @param class 相应类
  @return NSString：类名
  */
-+ (NSString *)fetchClassName:(Class)class;
++ (NSString *)fetchClassName:(Class)clas;
 
 /**
  获取成员变量
@@ -25,7 +25,7 @@
  @param class 成员变量所在的类
  @return 返回成员变量字符串数组
  */
-+ (NSArray *)fetchIvarList:(Class)class;
++ (NSArray *)fetchIvarList:(Class)clas;
 
 /**
  获取类的属性列表, 包括私有和公有属性，即定义在延展中的属性
@@ -33,7 +33,7 @@
  @param class Class
  @return 属性列表数组
  */
-+ (NSArray *)fetchPropertyList:(Class)class;
++ (NSArray *)fetchPropertyList:(Class)clas;
 
 /**
  获取对象方法列表：getter, setter, 对象方法等。但不能获取类方法
@@ -41,7 +41,7 @@
  @param class 方法所在的类
  @return 该类的方法列表
  */
-+ (NSArray *)fetchMethodList:(Class)class;
++ (NSArray *)fetchMethodList:(Class)clas;
 
 /**
  获取协议列表
@@ -49,7 +49,7 @@
  @param class 实现协议的类
  @return 返回该类实现的协议列表
  */
-+ (NSArray *)fetchProtocolList:(Class)class;
++ (NSArray *)fetchProtocolList:(Class)clas;
 
 
 /**
@@ -59,7 +59,7 @@
  @param methodSel SEL
  @param methodSelImpl 提供IMP的SEL
  */
-+ (void)addMethod:(Class)class method:(SEL)methodSel method:(SEL)methodSelImpl;
++ (void)addMethod:(Class)clas method:(SEL)methodSel method:(SEL)methodSelImpl;
 
 /**
  方法交换
@@ -68,5 +68,5 @@
  @param method1 方法1
  @param method2 方法2
  */
-+ (void)methodSwap:(Class)class firstMethod:(SEL)method1 secondMethod:(SEL)method2;
++ (void)methodSwap:(Class)clas firstMethod:(SEL)method1 secondMethod:(SEL)method2;
 @end

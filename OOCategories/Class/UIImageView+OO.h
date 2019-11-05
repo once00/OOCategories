@@ -24,6 +24,21 @@ NS_ASSUME_NONNULL_BEGIN
                          ToBounds:(BOOL)toBounds
                       cornerRadiu:(CGFloat)cornerRadiu;
 
+/**
+*  播放GIF
+*
+*  @param imageName    图片
+*  @param cont    图片个数
+*  @param framesPerSecond    图片播放间隔时间
+ *  @param loop    是否无线循环
+*/
+- (void)playGifAnimImageName:(NSString *)imageName Imagecount:(int)cont andFPS:(CGFloat)framesPerSecond loop:(BOOL)loop;
+
+/**
+*  停止播放GIF
+*/
+- (void)stopGifAnim;
+
 @end
 
 NS_ASSUME_NONNULL_END
