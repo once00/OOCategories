@@ -1,0 +1,6 @@
+framework module OOCategories {
+  umbrella header "OOCategories-umbrella.h"
+
+  export *
+  module * { export * }
+}
